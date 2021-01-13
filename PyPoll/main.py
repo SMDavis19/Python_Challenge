@@ -1,5 +1,7 @@
+import collections
 import csv
 import os
+from collections import Counter
 
 # Initialize variables
 poll_data = []
@@ -28,13 +30,32 @@ with open(csvpath) as csvfile:
     # Read each row of data after the header
     for line in csvreader:
         poll_data.append(line)
-
-    # Close file
+#   Close file
     csvfile.close()
 
-total_votes = sum([(lambda x:int(x['Voter ID']))(row) for row in poll_data])
+#   Loop for finding Election results
+candiate_votes = {}
+total_votes = 0
+for idx in range(len(poll_data)):
+    candidate_names = poll_data[idx]['Candidate']
+    total_votes += 1
+    if not candidate_names in candiate_votes:
+        candiate_votes[candidate_names] = 1
+    else:
+        candiate_votes[candidate_names] += 1
 
 
-print ("Election Results")
-print ("-----------------------------")
-print('Total number of Votes: %d' % len(poll_data))
+#   Total number of Votes
+#   Winner of the Election
+#   Runner up in the Election
+#   3rd place in the Election
+#   4th place in the Election
+
+candiate_votes = sorted(candiate_votes.items(), key=lambda item: item[1], reverse = True)
+for candidate_names, vote_count in candiate_votes:
+    precnt = float(vote_count) / float(total_votes) * 100
+    print(candidate_names+ ":" + str(precnt) + " " + str(vote_count))
+#print ("Election Results")
+#print ("-----------------------------")
+print('Total number of Votes: %d' % total_votes)
+#print ("-----------------------------")
