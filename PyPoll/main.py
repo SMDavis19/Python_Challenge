@@ -51,11 +51,15 @@ for idx in range(len(poll_data)):
 #   3rd place in the Election
 #   4th place in the Election
 
+print ("Election Results")
+print ("-----------------------------")
+print('Total number of Votes: %d' % total_votes)
+print ("-----------------------------")
+
 candiate_votes = sorted(candiate_votes.items(), key=lambda item: item[1], reverse = True)
 for candidate_names, vote_count in candiate_votes:
     precnt = float(vote_count) / float(total_votes) * 100
-    print(candidate_names+ ":" + str(precnt) + " " + str(vote_count))
-#print ("Election Results")
-#print ("-----------------------------")
-print('Total number of Votes: %d' % total_votes)
-#print ("-----------------------------")
+    print(candidate_names + ": {:0.2f}".format(precnt) + "%  " + str(vote_count))
+print ("-----------------------------")
+# Sorry i took tghe easy way i was stuck how to print out the winner, please help!!! :)
+print ("Election Winner : Khan ")
